@@ -1,5 +1,2 @@
-* [Python 基础](https://morvanzhou.github.io/tutorials/python-basic/)
-  * [基础](https://morvanzhou.github.io/tutorials/python-basic/basic/)
-  * [多线程 threading](https://morvanzhou.github.io/tutorials/python-basic/threading/)
-  * [多进程 multiprocessing](https://morvanzhou.github.io/tutorials/python-basic/multiprocessing/)
-  * [简单窗口 tkinter](https://morvanzhou.github.io/tutorials/python-basic/tkinter/)
+* [代数多重网格入门介绍](https://www.youtube.com/playlist?list=PLSVM68VUM1eXHQEKh0WyYen2Jii_0EqCX)
+  * [什么是多重网格](https://www.youtube.com/watch?v=R4eivWGy_Pg)
