@@ -2,7 +2,7 @@
 # 代数多重网格入门
 
 多重网格方法 (Multi-Grid) 就是由对偏微分方程里得出的代数方程组的求解的研究引发出来的一种计算方法，现在多重网格方法的研究依然是一个热点，特别是在非线性非对称问题的求解上的使用。
-代数多重网格（AMG）是利用几何多重网格（Geometric Multigrid, GMG）的一些重要原则和理念发展起来的不依赖于实际几何网格的多重网格方法。它继承了几何多重网格的主要优点，并且可以被用于更多类型的线性方程组。
+代数多重网格（AMG）是利用几何多重网格 (Geometric Multigrid, GMG) 的一些重要原则和理念发展起来的不依赖于实际几何网格的多重网格方法。它继承了几何多重网格的主要优点，并且可以被用于更多类型的线性方程组。
 
 * [代数多重网格入门介绍](https://www.youtube.com/playlist?list=PLSVM68VUM1eXHQEKh0WyYen2Jii_0EqCX)
   * [01 什么是多重网格](https://www.youtube.com/watch?v=R4eivWGy_Pg&index=1&list=PLSVM68VUM1eXHQEKh0WyYen2Jii_0EqCX)
