@@ -15,6 +15,12 @@
 
 
 
-# 开源 AMG
+# 开源代数多重网格软件包
 
+## 串行
 * [FASP](http://fasp.sourceforge.net/)
+* [SXAMG](https://github.com/huiscliu/sxamg)
+* [HSL MI20](http://www.hsl.rl.ac.uk/catalogue/hsl_mi20.html)
+
+## 并行
+* [Hypre](https://computation.llnl.gov/projects/hypre-scalable-linear-solvers-multigrid-methods)
