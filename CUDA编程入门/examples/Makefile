@@ -19,8 +19,5 @@ reduction_1: reduction_1.cu
 reduction_2: reduction_2.cu
 	nvcc -O3 -Xcompiler "-Wall -Wextra" reduction_2.cu -o reduction_2
 
-reduction_3: reduction_3.cu
-	nvcc -O3 -Xcompiler "-Wall -Wextra" reduction_3.cu -o reduction_3
-
 clean:
 	rm -f vec_add 1B-reduction reduction_3 mem mem-host
