@@ -1,5 +1,5 @@
 
-default: vec_add 1B-reduction mem mem-host reduction_1 reduction_2 
+default: vec_add 1B-reduction mem mem-host reduction_1 reduction_2  vec_dot
 
 vec_add: vec_add.cu
 	nvcc -O3 -Xcompiler "-Wall -Wextra" vec_add.cu -o vec_add
