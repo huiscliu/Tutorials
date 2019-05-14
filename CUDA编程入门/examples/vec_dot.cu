@@ -114,7 +114,7 @@ __global__ void dot_stg_3(FLOAT *x, int N)
 }
 
 /* dz and d serve as cache: result stores in d[0] */
-void dot(FLOAT *dx, FLOAT *dy, FLOAT *dz, FLOAT *d, int N)
+void dot_device(FLOAT *dx, FLOAT *dy, FLOAT *dz, FLOAT *d, int N)
 {
     /* 1D block */
     int bs = 256;
@@ -202,7 +202,7 @@ int main(int argc, char **argv)
     td = get_time();
 
     /* call GPU */
-    for (i = 0; i < itr; i++) dot(dx, dy, dz, d, N);
+    for (i = 0; i < itr; i++) dot_device(dx, dy, dz, d, N);
 
     /* let GPU finish */
     cudaThreadSynchronize();
