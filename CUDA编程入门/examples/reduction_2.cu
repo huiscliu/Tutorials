@@ -3,6 +3,16 @@
 
 #include "reduction_aux.h"
 
+__device__ void warpReduce(volatile FLOAT *sdata, int tid)
+{
+    sdata[tid] += sdata[tid + 32];
+    sdata[tid] += sdata[tid + 16];
+    sdata[tid] += sdata[tid + 8];
+    sdata[tid] += sdata[tid + 4];
+    sdata[tid] += sdata[tid + 2];
+    sdata[tid] += sdata[tid + 1];
+}
+
 /* sum all entries in x and asign to y
  * block dim must be 256 */
 __global__ void asum_stg_1(const FLOAT *x, FLOAT *y, int N)
@@ -29,14 +39,7 @@ __global__ void asum_stg_1(const FLOAT *x, FLOAT *y, int N)
     if (tid < 64) sdata[tid] += sdata[tid + 64];
     __syncthreads();
 
-    if (tid < 32) {
-        sdata[tid] += sdata[tid + 32];
-        sdata[tid] += sdata[tid + 16];
-        sdata[tid] += sdata[tid + 8];
-        sdata[tid] += sdata[tid + 4];
-        sdata[tid] += sdata[tid + 2];
-        sdata[tid] += sdata[tid + 1];
-    }
+    if (tid < 32) warpReduce(sdata, tid);
 
     if (tid == 0) y[bid] = sdata[0];
 }
@@ -60,14 +63,7 @@ __global__ void asum_stg_3(FLOAT *x, int N)
     if (tid < 64) sdata[tid] = sdata[tid] + sdata[tid + 64];
     __syncthreads();
 
-    if (tid < 32) {
-        sdata[tid] += sdata[tid + 32];
-        sdata[tid] += sdata[tid + 16];
-        sdata[tid] += sdata[tid + 8];
-        sdata[tid] += sdata[tid + 4];
-        sdata[tid] += sdata[tid + 2];
-        sdata[tid] += sdata[tid + 1];
-    }
+    if (tid < 32) warpReduce(sdata, tid);
 
     if (tid == 0) x[0] = sdata[0];
 }
