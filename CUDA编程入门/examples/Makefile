@@ -1,5 +1,5 @@
 
-default: vec_add 1B-reduction mem mem-host reduction_3
+default: vec_add 1B-reduction mem mem-host reduction_1 reduction_2 reduction_3
 
 vec_add: vec_add.cu
 	nvcc -O3 -Xcompiler "-Wall -Wextra" vec_add.cu -o vec_add
@@ -12,6 +12,12 @@ mem: mem.cu
 
 mem-host: mem-host.cu
 	nvcc -O3 -Xcompiler "-Wall -Wextra" mem-host.cu -o mem-host
+
+reduction_1: reduction_1.cu
+	nvcc -O3 -Xcompiler "-Wall -Wextra" reduction_1.cu -o reduction_1
+
+reduction_2: reduction_2.cu
+	nvcc -O3 -Xcompiler "-Wall -Wextra" reduction_2.cu -o reduction_2
 
 reduction_3: reduction_3.cu
 	nvcc -O3 -Xcompiler "-Wall -Wextra" reduction_3.cu -o reduction_3
