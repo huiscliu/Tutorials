@@ -170,6 +170,7 @@ int main(int argc, char **argv)
 
     cudaFree(dx);
     cudaFree(dy);
+    cudaFree(dz);
     free(hx);
 
     return 0;
