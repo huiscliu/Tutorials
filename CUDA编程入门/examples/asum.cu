@@ -137,7 +137,7 @@ __global__ void asum_stg_1(const FLOAT *x, FLOAT *y, int N)
     }
 }
 
-__global__ void asum_stg_2(FLOAT *x, int N)
+__global__ void asum_stg_3(FLOAT *x, int N)
 {
     __shared__ FLOAT sdata[128];
     int tid = threadIdx.x;
@@ -205,7 +205,7 @@ void asum(FLOAT *dx, FLOAT *dy, FLOAT *dz, int N)
     }
 
     /* stage 3 */
-    asum_stg_2<<<1, 128>>>(dz, gs);
+    asum_stg_3<<<1, 128>>>(dz, gs);
 }
 
 int main()
