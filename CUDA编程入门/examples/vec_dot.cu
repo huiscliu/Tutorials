@@ -2,6 +2,7 @@
 /* dot product of two vectors: d = <x, y> */
 
 #include "reduction_aux.h"
+#include <assert.h>
 
 /* host, add */
 FLOAT dot_host(FLOAT *x, FLOAT *y, int N)
