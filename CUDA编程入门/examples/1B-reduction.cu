@@ -8,7 +8,7 @@
 typedef double FLOAT;
 
 /* sum all entries in x and asign to y */
-__global__ void asum(const FLOAT *x, FLOAT *y)
+__global__ void asum_1(const FLOAT *x, FLOAT *y)
 {
     __shared__ FLOAT sdata[256];
     int tid = threadIdx.x;
@@ -42,6 +42,37 @@ __global__ void asum(const FLOAT *x, FLOAT *y)
     if (tid == 0) {
         *y = sdata[0] + sdata[1];
     }
+}
+
+__device__ void warpReduce(volatile FLOAT *sdata, int tid)
+{
+    sdata[tid] += sdata[tid + 32];
+    sdata[tid] += sdata[tid + 16];
+    sdata[tid] += sdata[tid + 8];
+    sdata[tid] += sdata[tid + 4];
+    sdata[tid] += sdata[tid + 2];
+    sdata[tid] += sdata[tid + 1];
+}
+
+__global__ void asum_2(const FLOAT *x, FLOAT *y)
+{
+    __shared__ FLOAT sdata[256];
+    int tid = threadIdx.x;
+
+    /* load data to shared mem */
+    sdata[tid] = x[tid];
+    __syncthreads();
+
+    /* reduction using shared mem */
+    if (tid < 128) sdata[tid] += sdata[tid + 128];
+    __syncthreads();
+
+    if (tid < 64) sdata[tid] += sdata[tid + 64];
+    __syncthreads();
+
+    if (tid < 32) warpReduce(sdata, tid);
+
+    if (tid == 0) y[0] = sdata[0];
 }
 
 int main()
@@ -83,7 +114,7 @@ int main()
     cudaMemcpy(dx, hx, nbytes, cudaMemcpyHostToDevice);
 
     /* call GPU */
-    asum<<<1, N>>>(dx, dy);
+    asum_1<<<1, N>>>(dx, dy);
 
     /* let GPU finish */
     cudaThreadSynchronize();
@@ -91,7 +122,18 @@ int main()
     /* copy data from GPU */
     cudaMemcpy(&as, dy, sizeof(FLOAT), cudaMemcpyDeviceToHost);
 
-    printf("asum, answer: 256, calculated by GPU:%g\n", as);
+    printf("asum_1, answer: 256, calculated by GPU:%g\n", as);
+
+    /* call GPU */
+    asum_2<<<1, N>>>(dx, dy);
+
+    /* let GPU finish */
+    cudaThreadSynchronize();
+
+    /* copy data from GPU */
+    cudaMemcpy(&as, dy, sizeof(FLOAT), cudaMemcpyDeviceToHost);
+
+    printf("asum_2, answer: 256, calculated by GPU:%g\n", as);
 
     cudaFree(dx);
     cudaFree(dy);
