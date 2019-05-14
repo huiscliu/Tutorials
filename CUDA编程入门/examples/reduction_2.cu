@@ -100,7 +100,7 @@ void asum(FLOAT *dx, FLOAT *dy, FLOAT *dz, int N)
     asum_stg_3<<<1, 128>>>(dz, gs);
 }
 
-int main()
+int main(int argc, char **argv)
 {
     int N = 10000070;
     int nbytes = N * sizeof(FLOAT);
@@ -110,6 +110,13 @@ int main()
     int i, itr = 20;
     FLOAT asd = 0, ash;
     double td, th;
+
+    if (argc == 2) {
+        int an;
+
+        an = atoi(argv[1]);
+        if (an > 0) N = an;
+    }
 
     /* allocate GPU mem */
     cudaMalloc((void **)&dx, nbytes);
