@@ -1,0 +1,47 @@
+#!/bin/bash
+
+process_deps () {
+    local src f files
+    src="$1"
+    if $2; then
+	if ! test -r "$src" -a "${src#\.\./include/}" = "$src"; then
+	    src="../include/$src"
+	fi
+	test -r "$src" || return
+	echo " $src"
+    fi
+    files=`grep '^#[ ]*include *"' "$src" | awk -F\" '{print $2}'`
+    for f in $files; do
+	process_deps "$f" true
+    done
+}
+
+# cd to top level directory
+cd `dirname $0`/..
+
+echo 1>&2 "Clean up auxiliary files ..."
+make -s clean >/dev/null 2>&1 || true
+
+for d in src; do
+  echo 1>&2 "Processing in $d ..."
+  cd $d || continue
+  echo " " >Makefile.dep
+  for f in *.c *.cxx *.cpp *.c++ *.C; do
+    test -r "$f" || continue
+    echo ""
+    echo -n "${f%\.*}.o: $f "
+    echo `process_deps "$f" false | sort -u`
+  done >> Makefile.dep
+  test $d = "." || cd ..
+done
+
+for d in src; do
+  cd $d || continue
+  for f in *.f *.for; do
+    test -r "$f" || continue
+    echo ""
+    echo -n "${f%\.*}.o: $f "
+  done >> Makefile.dep
+  test $d = "." || cd ..
+done
+echo 1>&2 "Done."

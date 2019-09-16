@@ -1,0 +1,262 @@
+AC_PREREQ(2.59)
+
+AC_INIT()
+m4_ifdef([AC_DISABLE_OPTION_CHECKING], [AC_DISABLE_OPTION_CHECKING()], [])
+
+dnl This MUST precede any other macro
+AC_CONFIG_AUX_DIR([utils])
+
+AC_CONFIG_HEADER([include/config.h])
+AC_CONFIG_FILES([Makefile Makefile.inc])
+SLSMGMT_DIR="`pwd`"
+
+AC_MSG_NOTICE(============================== compilers ===========================)
+
+#--------------------------------------- config files and compilers
+# Checks for programs.
+AC_PROG_CC(gcc icc clang)
+AC_PROG_CXX(g++ icpc clang++)
+AC_PROG_FC(gfortran gfortran-mp-5 g77 f77 ifort)
+AC_PROG_CPP
+
+if test "$GCC" = "yes"; then
+    if $CC -V 2>&1 | grep -q Intel; then
+        CFLAGS="$CFLAGS -Wall"
+    elif $CC -v 2>&1 | grep -q clang; then
+        CFLAGS="$CFLAGS -Wall -Wextra -Warray-bounds"
+    elif $CC -v 2>&1 | grep -q gcc; then
+        CFLAGS="$CFLAGS -Wall -Wextra"
+
+        for d in -Wmissing-declarations -Wmissing-prototypes -Wimplicit-function-declaration        \
+            -Wunused -Wuninitialized -Wvla -Wformat -Wformat-security -Wmain -Wsequence-point       \
+            -Wshadow -Wbad-function-cast -Wcomments -Wdeclaration-after-statement                   \
+            -Waddress -Wpointer-sign -Wempty-body -Wnested-externs -Wold-style-declaration          \
+            -Wold-style-definition -Wmissing-field-initializers -Wmaybe-uninitialized               \
+            -Wno-return-local-addr -Wreturn-type -Wsequence-point -Wundef -Wunknown-pragmas         \
+            -Wunused-label; do
+            AC_MSG_CHECKING([whether $CC supports $d ])
+            AC_LANG(C)
+            CFLAGS_bak="$CFLAGS"
+            CFLAGS="$CFLAGS $d"
+            AC_COMPILE_IFELSE([AC_LANG_SOURCE([main(){}])], tmp=yes, tmp=no)
+            if test $tmp = yes; then
+                AC_MSG_RESULT(yes)
+            else
+                AC_MSG_RESULT(no)
+                CFLAGS="$CFLAGS_bak"
+            fi
+        done
+    fi
+
+fi
+
+if test "$GXX" = "yes"; then
+    if $CXX -V 2>&1 | grep -q Intel; then
+        CXXFLAGS="$CXXFLAGS -w1"
+    elif $CXX -v 2>&1 | grep -q clang; then
+        CXXFLAGS="$CXXFLAGS -Wno-deprecated -Wall"
+    elif $CXX -v 2>&1 | grep -q gcc; then
+        CXXFLAGS="$CXXFLAGS -Wno-deprecated -Wall -std=c++11"
+
+        for d in -Wmissing-declarations -Wunused -Wuninitialized -Wvla -Wformat -Wformat-security      \
+            -Wmain -Wsequence-point -Wshadow -Waddress -Wcomments -Wmain -Wsequence-point              \
+            -Wempty-body -Wmissing-field-initializers  -Wmaybe-uninitialized -Wno-return-local-addr    \
+            -Wreturn-type -Wsequence-point -Wundef -Wunknown-pragmas -Wunused-label; do
+            AC_MSG_CHECKING([whether $CXX supports $d ])
+            AC_LANG(C++)
+            CXXFLAGS_bak="$CXXFLAGS"
+            CXXFLAGS="$CXXFLAGS $d"
+            AC_COMPILE_IFELSE([AC_LANG_SOURCE([main(){}])], tmp=yes, tmp=no)
+            if test $tmp = yes; then
+                AC_MSG_RESULT(yes)
+            else
+                AC_MSG_RESULT(no)
+                CXXFLAGS="$CXXFLAGS_bak"
+            fi
+        done
+    fi
+fi
+
+# Fortran
+AC_FC_WRAPPERS
+AC_FC_LIBRARY_LDFLAGS
+
+LIBS="-L/usr/local/lib $LIBS -lm"
+
+AC_ADD_LIBS(LIBS, ${FCLIBS}, append)
+
+dnl Change relative path in compilers to full path
+AC_FULLPATH(CC)
+AC_FULLPATH(CPP)
+AC_FULLPATH(FC)
+
+# The default linker
+AC_SUBST(LINKER, "$LINKER")
+
+AC_PREFIX_DEFAULT(/usr/local/projmgmt)
+
+AC_CHECK_PROGS(AR,[ar], no)
+if test $AR = "no" ; then
+    AC_MSG_ERROR(* AR is nott found!);
+fi
+
+AC_SUBST(AR)
+AC_PROG_RANLIB
+
+#--------------------------------------- rpath
+AC_SUBST(RPATH_FLAG, "")
+AC_ARG_ENABLE(rpath,
+[  --enable-rpath          enable use of rpath (default)
+  --disable-rpath         disable use of rpath
+  --with-rpath-flag=FLAG  compiler flag for rpath (e.g., "-Wl,-rpath,")],,
+enable_rpath=yes)
+if test -z "$with_rpath_flag" -a "$enable_rpath" != "no"; then
+    AC_MSG_CHECKING([for compiler flag for specifying rpath ])
+    LIBS_bak="$LIBS"
+    for with_rpath_flag in "-Wl,-rpath," "-Wl,-rpath " "-Wl,--rpath " \
+			   "-rpath " "--rpath " "-Wl,-R" "-R" "-R " ; do
+	LIBS="$LIBS_bak ${with_rpath_flag}/usr/lib"
+	AC_LINK_IFELSE([AC_LANG_PROGRAM()], enable_rpath=yes, enable_rpath=no)
+	if test "$enable_rpath" = "yes"; then break; fi
+    done
+    LIBS="$LIBS_bak"
+    if test "$enable_rpath" = "yes"; then
+	AC_MSG_RESULT("$with_rpath_flag")
+	RPATH_FLAG="$with_rpath_flag"
+    else
+	AC_MSG_RESULT(unknown)
+	RPATH_FLAG="unknown"
+    fi
+fi
+
+#--------------------------------------- header files
+AC_HEADER_TIME
+AC_CHECK_HEADERS([limits.h ctype.h])
+AC_CHECK_HEADERS([sys/time.h unistd.h])
+
+#--------------------------------------- library functions.
+AC_CHECK_FUNCS([gettimeofday])
+
+# fpe needs -lm
+LIBS="$LIBS -lm"
+
+AC_ADD_FLAGS(CPPFLAGS, -I/usr/local/include)
+AC_ADD_FLAGS(LDFLAGS, -L/usr/local/lib)
+
+#--------------------------------------- basic flags
+# Note: -I`pwd`/include and -L`pwd`/src must be the first term in CPPFLAGS
+# and LDFLAGS respectively, which will be changed to SLSMGMT_INSTDIR/include by
+# 'make install'
+CPPFLAGS="-I${SLSMGMT_DIR}/include $CPPFLAGS"
+LDFLAGS="-L${SLSMGMT_DIR}/src $LDFLAGS"
+
+#--------------------------------------- Fortran
+AC_FC_FUNC(dgemm,DGEMM)            dnl BLAS
+AC_FC_FUNC(dgels,DGELS)            dnl LAPACK
+
+#--------------------------------------- BLAS
+AC_LANG(C)
+AC_ARG_ENABLE(blas,
+[  --enable-blas         enable BLAS support (default)
+  --disable-blas        disable BLAS support
+  --with-blas=blas BLAS lib],,enable_blas=yes)
+if test "$enable_blas" != no; then
+    AC_MSG_CHECKING([whether we have BLAS ])
+
+    if test "$enable_blas" != no -a "$with_blas" == ""; then
+        for d in /usr/local/lib /usr/local/lib64 /usr/local/blas/ /usr/local/blas*/ \
+            /usr/local/blas/lib /usr/local/blas*/lib /usr/lib /usr/lib64            \
+            /opt/blas/lib /opt/blas*/lib ; do
+            if test -r ${d}/libblas.*; then
+                with_blas_libdir="$d"
+                with_blas="-L$d -lblas"
+                break
+            fi
+        done
+    fi
+
+    AC_ADD_LIBS(LIBS, $with_blas)
+    if test "$enable_blas" != no; then
+        AC_CHECK_FORTRAN([AC_LANG_SOURCE([main(){$DGEMM();}])], blas)
+        if test "$blas_ok" != "yes"; then
+            enable_blas=no
+        fi
+    fi
+
+    AC_MSG_RESULT($enable_blas)
+    if test "$enable_blas" != no; then
+        AC_MSG_NOTICE(* BLAS support enabled)
+        AC_MSG_NOTICE(* BLAS libs = $with_blas)
+        AC_DEFINE(USE_BLAS, 1)
+    else
+        AC_MSG_NOTICE(* BLAS is disabled)
+        AC_DEFINE(USE_BLAS, 0)
+    fi
+else
+    AC_MSG_NOTICE(* BLAS is disabled)
+    AC_DEFINE(USE_BLAS, 0)
+fi
+
+#--------------------------------------- SUPERLU
+AC_LANG(C)
+AC_ARG_ENABLE(superlu,
+[  --enable-superlu      enable SUPERLU support (default)
+  --disable-superlu     disable SUPERLU support
+  --with-superlu-libdir=DIR path for SUPERLU library
+  --with-superlu-incdir=DIR path for SUPERLU header file],,enable_superlu=yes)
+if test "$enable_superlu" != no; then
+    AC_MSG_CHECKING([whether we have SUPERLU ])
+
+    if test -z "$with_superlu_incdir" -a "$enable_superlu" != no; then
+        for d in /usr/local/superlu /usr/local/superlu* /usr/local /usr \
+            /opt/superlu /opt/superlu*; do
+            if test -r ${d}/include/slu_ddefs.h; then
+                with_superlu_incdir="$d"
+                break
+            fi
+        done
+        if test -z "$with_superlu_incdir"; then
+            enable_superlu=no
+        fi
+    fi
+
+    if test -z "$with_superlu_libdir" -a "$enable_superlu" != no; then
+        for d in /usr/local/superlu /usr/local/superlu* /usr/local /usr \
+            /opt/superlu /opt/superlu*; do
+            if test -r ${d}/lib/libsuperlu.so -o -r ${d}/lib/libsuperlu.a; then
+                with_superlu_libdir="$d"
+                break
+            fi
+        done
+        if test -z "$with_superlu_libdir"; then
+            enable_superlu=no
+        fi
+    fi
+
+    AC_MSG_RESULT($enable_superlu)
+    if test "$enable_superlu" != no; then
+        AC_MSG_NOTICE(* SUPERLU support enabled)
+        AC_MSG_NOTICE(* SUPERLU include dir = ${with_superlu_incdir}/include)
+        AC_MSG_NOTICE(* SUPERLU lib dir = ${with_superlu_libdir}/lib)
+        AC_MSG_NOTICE(* SUPERLU libs = -lsuperlu)
+        AC_DEFINE(USE_SUPERLU, 1)
+        AC_ADD_FLAGS(CPPFLAGS, -I${with_superlu_incdir}/include)
+        AC_ADD_FLAGS(LDFLAGS, -L${with_superlu_libdir}/lib)
+        AC_ADD_LIBS(LIBS, -lsuperlu)
+    else
+        AC_MSG_NOTICE(* SUPERLU is disabled)
+        AC_DEFINE(USE_SUPERLU, 0)
+    fi
+else
+    AC_DEFINE(USE_SUPERLU, 0)
+    AC_MSG_NOTICE(* SUPERLU is disabled)
+fi
+
+#--------------------------------------- the end
+if test -z "$LINKER"; then
+    LINKER="$CXX"
+fi
+
+LIBS="-lprojmgmt $LIBS"
+
+AC_OUTPUT

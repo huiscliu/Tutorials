@@ -1,0 +1,5 @@
+ 
+
+projmgmt.o: projmgmt.c ../include/projmgmt.h
+
+fapp.o: fapp.f 
