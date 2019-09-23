@@ -103,15 +103,13 @@ endif
 cnoremap <C-A>      <Home>
 cnoremap <C-E>      <End>
 
-map f 
-map b 
+map f <C-f>
+map b <C-b>
 map t <C-o>
 map W <C-w>
 map Z ZZ
 map t <C-t>
 map [ <C-]>
-map  [7~
-map  [8~
 nmap <space> zz
 map s <C-^>
 
