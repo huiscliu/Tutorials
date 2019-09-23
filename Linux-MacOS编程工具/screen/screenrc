@@ -1,0 +1,28 @@
+#
+# This is an example for the global screenrc file.
+# You may want to install this file as /usr/local/etc/screenrc.
+# Check config.h for the exact location.
+
+#hardstatus on
+#hardstatus alwayslastline 
+#hardstatus string "%{.bW}%-w%{.rY}%n %t%{-}%+w %=%{..G} %Y/%m/%d"
+
+# function key
+escape ``
+defscrollback 0
+
+#nonblock on
+attrcolor b ".I"
+altscreen on
+
+#startup_message off
+#defflow on # will force screen to process ^S/^Q
+
+deflogin on
+autodetach on
+nonblock on
+
+vbell off
+vbell_msg "   Wuff  ----  Wuff!!  "
+
+caption always "%{yk}%{-b ..}%-w%{+b ..}%{yk}[%n*%t]%{-}%{yk}%+w"
