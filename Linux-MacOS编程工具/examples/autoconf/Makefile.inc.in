@@ -1,4 +1,4 @@
-LIBNAME         = projmgmt
+LIBNAME         = scutils
 CPP             = @CPP@
 CPPFLAGS        = @CPPFLAGS@
 

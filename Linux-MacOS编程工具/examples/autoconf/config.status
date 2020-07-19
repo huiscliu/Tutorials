@@ -433,7 +433,7 @@ Copyright (C) 2012 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/home/liuhui/codehub/projmgmt/autoconf'
+ac_pwd='/home/liuhui/work/tutorials/Linux-MacOS编程工具/examples/autoconf'
 srcdir='.'
 test -n "$AWK" || AWK=awk
 # The default lists apply if the user does not specify any file.
@@ -610,8 +610,8 @@ S["RPATH_FLAG"]="-Wl,-rpath,"
 S["RANLIB"]="ranlib"
 S["AR"]="ar"
 S["LINKER"]="g++"
-S["FCLIBS"]=" -L/usr/lib/gcc/x86_64-redhat-linux/9 -L/usr/lib/gcc/x86_64-redhat-linux/9/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_"\
-"64-redhat-linux/9/../../.. -lgfortran -lm -lquadmath"
+S["FCLIBS"]=" -L/usr/lib/gcc/x86_64-redhat-linux/10 -L/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x8"\
+"6_64-redhat-linux/10/../../.. -lgfortran -lm -lquadmath"
 S["host_os"]="linux-gnu"
 S["host_vendor"]="unknown"
 S["host_cpu"]="x86_64"
@@ -632,8 +632,8 @@ S["CXX"]="g++"
 S["OBJEXT"]="o"
 S["EXEEXT"]=""
 S["ac_ct_CC"]="gcc"
-S["CPPFLAGS"]="-I/home/liuhui/codehub/projmgmt/autoconf/include  -I/usr/local/include -I/usr/local/superlu/include"
-S["LDFLAGS"]="-L/home/liuhui/codehub/projmgmt/autoconf/src  -L/usr/local/lib -L/usr/local/superlu/lib"
+S["CPPFLAGS"]="-I/home/liuhui/work/tutorials/Linux-MacOS编程工具/examples/autoconf/include  -I/usr/local/include"
+S["LDFLAGS"]="-L/home/liuhui/work/tutorials/Linux-MacOS编程工具/examples/autoconf/src  -L/usr/local/lib"
 S["CFLAGS"]="-g -O2 -Wall -Wextra -Wmissing-declarations -Wmissing-prototypes -Wimplicit-function-declaration -Wunused -Wuninitialized -Wvla -Wformat -Wformat-se"\
 "curity -Wmain -Wsequence-point -Wshadow -Wbad-function-cast -Wcomments -Wdeclaration-after-statement -Waddress -Wpointer-sign -Wempty-body -Wnested-"\
 "externs -Wold-style-declaration -Wold-style-definition -Wmissing-field-initializers -Wmaybe-uninitialized -Wno-return-local-addr -Wreturn-type -Wseq"\
@@ -642,8 +642,8 @@ S["CC"]="/usr/lib64/ccache/gcc "
 S["target_alias"]=""
 S["host_alias"]=""
 S["build_alias"]=""
-S["LIBS"]="-lprojmgmt  -lsuperlu  -lblas -L/usr/local/lib  -lm  -L/usr/lib/gcc/x86_64-redhat-linux/9 -L/usr/lib/gcc/x86_64-redhat-linux/9/../../../../lib64 -L/"\
-"lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/9/../../.. -lgfortran -lm -lquadmath -lm"
+S["LIBS"]="-lprojmgmt  -lblas -L/usr/local/lib  -lm  -L/usr/lib/gcc/x86_64-redhat-linux/10 -L/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64 -L/lib/../li"\
+"b64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/10/../../.. -lgfortran -lm -lquadmath -lm"
 S["ECHO_T"]=""
 S["ECHO_N"]="-n"
 S["ECHO_C"]=""
@@ -746,7 +746,7 @@ D["HAVE_SYS_TIME_H"]=" 1"
 D["HAVE_UNISTD_H"]=" 1"
 D["HAVE_GETTIMEOFDAY"]=" 1"
 D["USE_BLAS"]=" 1"
-D["USE_SUPERLU"]=" 1"
+D["USE_SUPERLU"]=" 0"
   for (key in D) D_is_set[key] = 1
   FS = ""
 }

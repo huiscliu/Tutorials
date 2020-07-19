@@ -1,5 +1,5 @@
  
 
-projmgmt.o: projmgmt.c ../include/projmgmt.h
+utils.o: utils.c ../include/config.h ../include/utils.h
 
-fapp.o: fapp.f 
+app.o: app.f 

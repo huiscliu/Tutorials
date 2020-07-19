@@ -18,6 +18,6 @@
 #define FC_FUNC_(name,NAME) name ## _
 
 #define USE_BLAS 1
-#define USE_SUPERLU 1
+#define USE_SUPERLU 0
 
 #endif

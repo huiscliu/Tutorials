@@ -1,6 +1,6 @@
-LIBNAME         = projmgmt
+LIBNAME         = scutils
 CPP             = /usr/lib64/ccache/gcc -E
-CPPFLAGS        = -I/home/liuhui/codehub/projmgmt/autoconf/include  -I/usr/local/include -I/usr/local/superlu/include
+CPPFLAGS        = -I/home/liuhui/work/tutorials/Linux-MacOS编程工具/examples/autoconf/include  -I/usr/local/include
 
 CXX             = g++
 CXXFLAGS        = -g -O2 -Wno-deprecated -Wall -std=c++11 -Wmissing-declarations -Wunused -Wuninitialized -Wvla -Wformat -Wformat-security -Wmain -Wsequence-point -Wshadow -Waddress -Wcomments -Wmain -Wsequence-point -Wempty-body -Wmissing-field-initializers -Wmaybe-uninitialized -Wno-return-local-addr -Wreturn-type -Wsequence-point -Wundef -Wunknown-pragmas -Wunused-label
@@ -10,11 +10,11 @@ CFLAGS          = -g -O2 -Wall -Wextra -Wmissing-declarations -Wmissing-prototyp
 
 FC              = /usr/bin/gfortran 
 FCFLAGS         = -g -O2
-FCLIBS          =  -L/usr/lib/gcc/x86_64-redhat-linux/9 -L/usr/lib/gcc/x86_64-redhat-linux/9/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/9/../../.. -lgfortran -lm -lquadmath
+FCLIBS          =  -L/usr/lib/gcc/x86_64-redhat-linux/10 -L/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/10/../../.. -lgfortran -lm -lquadmath
 
 LINKER          = g++
-LDFLAGS         = -L/home/liuhui/codehub/projmgmt/autoconf/src  -L/usr/local/lib -L/usr/local/superlu/lib
-LIBS            = -lprojmgmt  -lsuperlu  -lblas -L/usr/local/lib  -lm  -L/usr/lib/gcc/x86_64-redhat-linux/9 -L/usr/lib/gcc/x86_64-redhat-linux/9/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/9/../../.. -lgfortran -lm -lquadmath -lm
+LDFLAGS         = -L/home/liuhui/work/tutorials/Linux-MacOS编程工具/examples/autoconf/src  -L/usr/local/lib
+LIBS            = -lprojmgmt  -lblas -L/usr/local/lib  -lm  -L/usr/lib/gcc/x86_64-redhat-linux/10 -L/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/10/../../.. -lgfortran -lm -lquadmath -lm
 
 AR              = ar
 RANLIB          = ranlib
