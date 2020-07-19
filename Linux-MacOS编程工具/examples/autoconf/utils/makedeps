@@ -37,7 +37,7 @@ done
 
 for d in src; do
   cd $d || continue
-  for f in *.f *.for; do
+  for f in *.f *.F *.FOR *.for *.f95 *.f90; do
     test -r "$f" || continue
     echo ""
     echo -n "${f%\.*}.o: $f "
