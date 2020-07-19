@@ -14,12 +14,12 @@ FCLIBS          =  -L/usr/lib/gcc/x86_64-redhat-linux/10 -L/usr/lib/gcc/x86_64-r
 
 LINKER          = g++
 LDFLAGS         = -L/home/liuhui/work/tutorials/Linux-MacOS编程工具/examples/autoconf/src  -L/usr/local/lib
-LIBS            = -lprojmgmt  -lblas -L/usr/local/lib  -lm  -L/usr/lib/gcc/x86_64-redhat-linux/10 -L/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/10/../../.. -lgfortran -lm -lquadmath -lm
+LIBS            = -l${LIBNAME}  -lblas -L/usr/local/lib  -lm  -L/usr/lib/gcc/x86_64-redhat-linux/10 -L/usr/lib/gcc/x86_64-redhat-linux/10/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/10/../../.. -lgfortran -lm -lquadmath -lm
 
 AR              = ar
 RANLIB          = ranlib
 
-prefix		= /usr/local/projmgmt
+prefix		= /usr/local/${LIBNAME}
 exec_prefix	= ${prefix}
 bindir		= ${exec_prefix}/bin
 libdir		= ${exec_prefix}/lib
