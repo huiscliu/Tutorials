@@ -1,17 +1,21 @@
 
-default: exam
+default: main
 
 CC     = gcc
+
 CFLAGS = -Wall -Wextra -O2 -g -Wmissing-declarations -Wmissing-prototypes -Wimplicit-function-declaration -Wunused -Wuninitialized -Wvla -Wformat -Wformat-security -Wmain -Wsequence-point -Wshadow -Wbad-function-cast -Wcomments -Wdeclaration-after-statement -Waddress -Wpointer-sign -Wempty-body -Wnested-externs -Wold-style-declaration -Wold-style-definition -Wmissing-field-initializers -Wmaybe-uninitialized -Wno-return-local-addr -Wreturn-type -Wsequence-point -Wundef -Wunknown-pragmas -Wunused-label
 
-exam: exam.o projmgmt.o
-	$(CC) -o exam exam.o projmgmt.o
+main: main.o utils.o
+	$(CC) -o main main.o utils.o
+	@echo ""
 
-exam.o: exam.c projmgmt.h
-	$(CC) $(CFLAGS) -c exam.c
+main.o: main.c utils.h
+	$(CC) $(CFLAGS) -c main.c
+	@echo ""
 
-projmgmt.o: projmgmt.c projmgmt.h
-	$(CC) $(CFLAGS) -c projmgmt.c
+utils.o: utils.c utils.h
+	$(CC) $(CFLAGS) -c utils.c
+	@echo ""
 
 clean:
-	rm -fv exam *.o
+	rm -fv main *.o
