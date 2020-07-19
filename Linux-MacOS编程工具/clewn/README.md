@@ -1,4 +1,0 @@
-
-# clewn
-
-a GUI debugger
