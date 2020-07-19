@@ -1,3 +1,2 @@
 
-# projmgmt
-Linux /Mac OS Project Management using Make and Autoconf
+# Linux and MacOS Programming Tools
