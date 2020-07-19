@@ -93,7 +93,7 @@ AC_FULLPATH(FC)
 # The default linker
 AC_SUBST(LINKER, "$LINKER")
 
-AC_PREFIX_DEFAULT(/usr/local/projmgmt)
+AC_PREFIX_DEFAULT(/usr/local/scutils)
 
 AC_CHECK_PROGS(AR,[ar], no)
 if test $AR = "no" ; then
@@ -197,66 +197,11 @@ else
     AC_DEFINE(USE_BLAS, 0)
 fi
 
-#--------------------------------------- SUPERLU
-AC_LANG(C)
-AC_ARG_ENABLE(superlu,
-[  --enable-superlu      enable SUPERLU support (default)
-  --disable-superlu     disable SUPERLU support
-  --with-superlu-libdir=DIR path for SUPERLU library
-  --with-superlu-incdir=DIR path for SUPERLU header file],,enable_superlu=yes)
-if test "$enable_superlu" != no; then
-    AC_MSG_CHECKING([whether we have SUPERLU ])
-
-    if test -z "$with_superlu_incdir" -a "$enable_superlu" != no; then
-        for d in /usr/local/superlu /usr/local/superlu* /usr/local /usr \
-            /opt/superlu /opt/superlu*; do
-            if test -r ${d}/include/slu_ddefs.h; then
-                with_superlu_incdir="$d"
-                break
-            fi
-        done
-        if test -z "$with_superlu_incdir"; then
-            enable_superlu=no
-        fi
-    fi
-
-    if test -z "$with_superlu_libdir" -a "$enable_superlu" != no; then
-        for d in /usr/local/superlu /usr/local/superlu* /usr/local /usr \
-            /opt/superlu /opt/superlu*; do
-            if test -r ${d}/lib/libsuperlu.so -o -r ${d}/lib/libsuperlu.a; then
-                with_superlu_libdir="$d"
-                break
-            fi
-        done
-        if test -z "$with_superlu_libdir"; then
-            enable_superlu=no
-        fi
-    fi
-
-    AC_MSG_RESULT($enable_superlu)
-    if test "$enable_superlu" != no; then
-        AC_MSG_NOTICE(* SUPERLU support enabled)
-        AC_MSG_NOTICE(* SUPERLU include dir = ${with_superlu_incdir}/include)
-        AC_MSG_NOTICE(* SUPERLU lib dir = ${with_superlu_libdir}/lib)
-        AC_MSG_NOTICE(* SUPERLU libs = -lsuperlu)
-        AC_DEFINE(USE_SUPERLU, 1)
-        AC_ADD_FLAGS(CPPFLAGS, -I${with_superlu_incdir}/include)
-        AC_ADD_FLAGS(LDFLAGS, -L${with_superlu_libdir}/lib)
-        AC_ADD_LIBS(LIBS, -lsuperlu)
-    else
-        AC_MSG_NOTICE(* SUPERLU is disabled)
-        AC_DEFINE(USE_SUPERLU, 0)
-    fi
-else
-    AC_DEFINE(USE_SUPERLU, 0)
-    AC_MSG_NOTICE(* SUPERLU is disabled)
-fi
-
 #--------------------------------------- the end
 if test -z "$LINKER"; then
     LINKER="$CXX"
 fi
 
-LIBS="-lprojmgmt $LIBS"
+LIBS="-lscutils $LIBS"
 
 AC_OUTPUT

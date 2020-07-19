@@ -583,7 +583,7 @@ PACKAGE_BUGREPORT=
 PACKAGE_URL=
 
 enable_option_checking=no
-ac_default_prefix=/usr/local/projmgmt
+ac_default_prefix=/usr/local/scutils
 # Factoring default headers for most tests.
 ac_includes_default="\
 #include <stdio.h>
@@ -695,7 +695,6 @@ ac_user_opts='
 enable_option_checking
 enable_rpath
 enable_blas
-enable_superlu
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1329,10 +1328,6 @@ Optional Features:
   --enable-blas         enable BLAS support (default)
   --disable-blas        disable BLAS support
   --with-blas=blas BLAS lib
-  --enable-superlu      enable SUPERLU support (default)
-  --disable-superlu     disable SUPERLU support
-  --with-superlu-libdir=DIR path for SUPERLU library
-  --with-superlu-incdir=DIR path for SUPERLU header file
 
 Some influential environment variables:
   CC          C compiler command
@@ -5815,127 +5810,12 @@ $as_echo "$as_me: * BLAS is disabled" >&6;}
 
 fi
 
-#--------------------------------------- SUPERLU
-ac_ext=c
-ac_cpp='$CPP $CPPFLAGS'
-ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
-ac_compiler_gnu=$ac_cv_c_compiler_gnu
-
-# Check whether --enable-superlu was given.
-if test "${enable_superlu+set}" = set; then :
-  enableval=$enable_superlu;
-else
-  enable_superlu=yes
-fi
-
-if test "$enable_superlu" != no; then
-    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether we have SUPERLU " >&5
-$as_echo_n "checking whether we have SUPERLU ... " >&6; }
-
-    if test -z "$with_superlu_incdir" -a "$enable_superlu" != no; then
-        for d in /usr/local/superlu /usr/local/superlu* /usr/local /usr \
-            /opt/superlu /opt/superlu*; do
-            if test -r ${d}/include/slu_ddefs.h; then
-                with_superlu_incdir="$d"
-                break
-            fi
-        done
-        if test -z "$with_superlu_incdir"; then
-            enable_superlu=no
-        fi
-    fi
-
-    if test -z "$with_superlu_libdir" -a "$enable_superlu" != no; then
-        for d in /usr/local/superlu /usr/local/superlu* /usr/local /usr \
-            /opt/superlu /opt/superlu*; do
-            if test -r ${d}/lib/libsuperlu.so -o -r ${d}/lib/libsuperlu.a; then
-                with_superlu_libdir="$d"
-                break
-            fi
-        done
-        if test -z "$with_superlu_libdir"; then
-            enable_superlu=no
-        fi
-    fi
-
-    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $enable_superlu" >&5
-$as_echo "$enable_superlu" >&6; }
-    if test "$enable_superlu" != no; then
-        { $as_echo "$as_me:${as_lineno-$LINENO}: * SUPERLU support enabled" >&5
-$as_echo "$as_me: * SUPERLU support enabled" >&6;}
-        { $as_echo "$as_me:${as_lineno-$LINENO}: * SUPERLU include dir = ${with_superlu_incdir}/include" >&5
-$as_echo "$as_me: * SUPERLU include dir = ${with_superlu_incdir}/include" >&6;}
-        { $as_echo "$as_me:${as_lineno-$LINENO}: * SUPERLU lib dir = ${with_superlu_libdir}/lib" >&5
-$as_echo "$as_me: * SUPERLU lib dir = ${with_superlu_libdir}/lib" >&6;}
-        { $as_echo "$as_me:${as_lineno-$LINENO}: * SUPERLU libs = -lsuperlu" >&5
-$as_echo "$as_me: * SUPERLU libs = -lsuperlu" >&6;}
-        $as_echo "#define USE_SUPERLU 1" >>confdefs.h
-
-            for ac_i in -I${with_superlu_incdir}/include; do
-	if test "$ac_i" = "-I/usr/include" -o "$ac_i" = "-L/usr/lib"; then
-	    continue
-	fi
-	if ! echo " ${CPPFLAGS} " | grep " $ac_i " >/dev/null; then
-	    CPPFLAGS="${CPPFLAGS} $ac_i"
-	    continue
-	fi
-    done
-            for ac_i in -L${with_superlu_libdir}/lib; do
-	if test "$ac_i" = "-I/usr/include" -o "$ac_i" = "-L/usr/lib"; then
-	    continue
-	fi
-	if ! echo " ${LDFLAGS} " | grep " $ac_i " >/dev/null; then
-	    LDFLAGS="${LDFLAGS} $ac_i"
-	    continue
-	fi
-    done
-            ac_tmp=""
-    for ac_i in -lsuperlu; do
-	# always keep '-lxxx'
-	if test "$ac_i" != "`echo $ac_i | sed -e 's/^-l//'`"; then
-	    ac_tmp="$ac_tmp $ac_i"
-	    continue
-	fi
-	# always keep non-option items
-	# Warning: this breaks cases like '-Ldira -lxxx -Ldirb -lxxx'
-	if test "$ac_i" = "`echo $ac_i | sed -e 's/^-//'`"; then
-	    ac_tmp="$ac_tmp $ac_i"
-	    continue
-	fi
-	if ! echo " ${LIBS} " " $ac_tmp " | grep " $ac_i " >/dev/null; then
-	    ac_tmp="$ac_tmp $ac_i"
-	    continue
-	fi
-    done
-    if test -n "$ac_tmp"; then
-	if test "" = "append"; then
-	    # append new libs
-	    LIBS="${LIBS} $ac_tmp"
-	else
-	    # prepend new libs
-	    LIBS="$ac_tmp ${LIBS}"
-	fi
-    fi
-    else
-        { $as_echo "$as_me:${as_lineno-$LINENO}: * SUPERLU is disabled" >&5
-$as_echo "$as_me: * SUPERLU is disabled" >&6;}
-        $as_echo "#define USE_SUPERLU 0" >>confdefs.h
-
-    fi
-else
-    $as_echo "#define USE_SUPERLU 0" >>confdefs.h
-
-    { $as_echo "$as_me:${as_lineno-$LINENO}: * SUPERLU is disabled" >&5
-$as_echo "$as_me: * SUPERLU is disabled" >&6;}
-fi
-
 #--------------------------------------- the end
 if test -z "$LINKER"; then
     LINKER="$CXX"
 fi
 
-LIBS="-lprojmgmt $LIBS"
+LIBS="-lscutils $LIBS"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
