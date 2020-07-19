@@ -10,7 +10,14 @@ int main(void)
     x = malloc(size * sizeof(*x));
     y = malloc(size * sizeof(*y));
 
+    for (i = 0; i < size; i++) {
+        x[i] = i;
+        y[i] = i + 1;
+    }
+
     for (i = 0; i < size; i++) d += x[i] * y[i];
+
+    printf("dot product result: %g\n", d);
 
     free(x);
     free(y);
