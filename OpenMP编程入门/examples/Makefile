@@ -1,4 +1,6 @@
 
+.PHONY: defaullt all clean
+
 default: all
 
 CC      = gcc
@@ -16,3 +18,6 @@ all: $(BINS)
 % : %.c
 	${CC} -o $@ $*.c $(CFLAGS) ${LDFLAGS} 
 	@echo
+
+clean:
+	rm -f $(BINS)
