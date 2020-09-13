@@ -28,7 +28,7 @@ int main()
     }
 
     printf("\n\n\n");
-    printf("final n: %d\n", n);
+    printf("Data race happened and final n is: %d\n", n);
 
     return 0;
 }
