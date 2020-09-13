@@ -6,17 +6,17 @@ int main()
 {
     int n = 20;
 
-    #pragma omp parallel private(n)
+    #pragma omp parallel firstprivate(n)
     {
         int id;
 
         id = omp_get_thread_num();
 
-        /* n is private and NOT initialized */
+        /* n is firstprivate */
         printf("This is thread: %d. Initial value of n is: %d\n", id, n);
 
         n = -id;
-        printf("This is thread: %d. Value of n is: %d\n", id, n);
+        printf("This is thread: %d. Value of n is changed to: %d\n", id, n);
     }
 
     printf("\n\n\n");
