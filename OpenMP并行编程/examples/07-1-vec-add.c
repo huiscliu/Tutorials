@@ -37,14 +37,14 @@ int main(int argc, char **argv)
 
     va_tm = omp_get_time();
 
-#pragma omp parallel
-#pragma omp for
+    #pragma omp parallel
+    #pragma omp for
     for (i = 0; i < len; i++) {
         x[i] = i + 0.3;
         y[i] = i + M_PI;
     }
 
-#pragma omp parallel for
+    #pragma omp parallel for
     for (i = 0; i < len; i++) {
         z[i] = x[i] + y[i];
     }

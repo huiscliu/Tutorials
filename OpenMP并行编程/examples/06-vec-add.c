@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 
     va_tm = omp_get_time();
 
-#pragma omp parallel 
+    #pragma omp parallel 
     {
         int i;
         int num_threads;

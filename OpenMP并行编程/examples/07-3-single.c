@@ -3,9 +3,9 @@
 
 int main()
 {
-#pragma omp parallel
+    #pragma omp parallel
     {
-#pragma omp single
+        #pragma omp single
         printf("Hello World!\n");
    }
 

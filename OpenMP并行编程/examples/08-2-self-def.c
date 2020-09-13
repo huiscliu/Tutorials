@@ -14,14 +14,14 @@ int main()
     int result = 0;
     int data[N];
 
-#pragma omp parallel for
+    #pragma omp parallel for
     for (i = 0; i < N; i++) data[i] = i;
 
-#pragma omp declare reduction(maxabs : int :              \
+    #pragma omp declare reduction(maxabs : int :              \
         omp_out = abs(omp_in) < abs(omp_out) ? omp_out : abs(omp_in))\
         initializer (omp_priv=0)
 
-#pragma omp parallel for reduction(maxabs:result)
+    #pragma omp parallel for reduction(maxabs:result)
     for (i = 0; i < N; i++) {
         if (abs(data[i]) > abs(result)) {
             result = abs(data[i]);

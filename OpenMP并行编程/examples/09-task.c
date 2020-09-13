@@ -9,7 +9,7 @@ void task_func(int id, int v)
 
 int main()
 {
-#pragma omp parallel
+    #pragma omp parallel
     {
         int id;
         int i;
@@ -17,7 +17,7 @@ int main()
         id = omp_get_thread_num();
 
         for (i = 0; i < 20; i++) {
-#pragma omp task
+            #pragma omp task
             task_func(id, i);
         }
     }
