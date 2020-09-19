@@ -12,7 +12,8 @@ int main()
 
         id = omp_get_thread_num();
 
-        /* n is private and NOT initialized */
+        /* n is private and NOT initialized.
+         * Compiler won't be happy */
         printf("This is thread: %d. Initial value of n is: %d\n", id, n);
 
         n = -id;
