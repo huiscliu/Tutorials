@@ -3,9 +3,9 @@
 
 default: all
 
-CC      = gcc
-CFLAGS  = -Wall -Wextra -O2 -g -fopenmp
-LDFLAGS = -lgomp -lm
+CC      = mpicc
+CFLAGS  = -Wall -Wextra -O2 -g
+LDFLAGS = -lmpi -lm
 
 SRC     = $(wildcard *.c)
 DIR     = $(notdir $(SRC))
