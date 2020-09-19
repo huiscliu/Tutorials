@@ -1,5 +1,5 @@
 
-# Introduction to OpenMP Programming
+# Introduction to Parallel Programming Using OpenMP
 
 This is a tutorial for multi-core parallel programming using OpenMP. Modern CPUs usually have multiple cores,
      such as 16 cores. Also, each CPU may have multiple memory channels. If they are utilized properly, our

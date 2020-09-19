@@ -1,5 +1,5 @@
 
-# Introduction to MPI Programming
+# Introduction to Parallel Programming Using MPI
 This is a tutorial for massive parallel programming using MPI.
 
 Many applications require huge memory and CPU performance, such as weather forecast and nuclear simulation.
