@@ -17,7 +17,6 @@ all: $(BINS)
 
 % : %.c
 	${CC} -o $@ $*.c $(CFLAGS) ${LDFLAGS} 
-	@echo
 
 clean:
 	rm -f $(BINS)
