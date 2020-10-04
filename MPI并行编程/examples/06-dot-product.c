@@ -46,11 +46,19 @@ int main(int argc, char **argv)
     if (rank == 0) {
         double temp;
 
+#if 0
         for (i = 1; i < nprocs; i++) {
             MPI_Recv(&temp, 1, MPI_DOUBLE, i, 2020, comm, &status);
 
             nrm += temp;
         }
+#else
+        for (i = 1; i < nprocs; i++) {
+            MPI_Recv(&temp, 1, MPI_DOUBLE, MPI_ANY_SOURCE, MPI_ANY_TAG, comm, &status);
+
+            nrm += temp;
+        }
+#endif
 
         nrm = sqrt(nrm);
         printf("L2 norm is %g\n", nrm);
