@@ -23,12 +23,11 @@ int main(int argc, char **argv)
 
     /* process 0 sends info to 1 */
     if (rank == 0) {
-        sb[0] = 0;
-        sb[1] = 1;
-        sb[2] = 2;
-        sb[3] = 3;
-
+        /* to make compiler happy */
+        (void) sb;
+#if 0
         MPI_Send(sb, 2, MPI_INT, 1, 999, comm);
+#endif
     }
     else if (rank == 1) {
         MPI_Recv(rb, 2, MPI_INT, 0, 999, comm, &status);
