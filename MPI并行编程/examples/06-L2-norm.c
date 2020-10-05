@@ -10,6 +10,7 @@
  *
  * L2 norm of a vector:
  * |v|_2 = sqrt(v[0]*v[0] + v[1]*v[1] + .... + v[n]*v[n]) 
+ *       = (v[0]^2 + v[1]^2 + .... + v[n]^2)^0.5
  *
  * */
 int main(int argc, char **argv)
