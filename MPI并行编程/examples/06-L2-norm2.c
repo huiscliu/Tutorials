@@ -50,24 +50,15 @@ int main(int argc, char **argv)
     /* partial norm */
     for (i = 0; i < lsize; i++) nrm += x[i] * x[i];
 
-    /* rank 0 receives partial norm from other MPIs */
     if (rank == 0) {
         double temp;
 
         /* rank 0 receive partial L2 norms from other ranks */
-#if 0
         for (i = 1; i < nprocs; i++) {
             MPI_Recv(&temp, 1, MPI_DOUBLE, i, 2020, comm, &status);
 
             nrm += temp;
         }
-#else
-        for (i = 1; i < nprocs; i++) {
-            MPI_Recv(&temp, 1, MPI_DOUBLE, MPI_ANY_SOURCE, MPI_ANY_TAG, comm, &status);
-
-            nrm += temp;
-        }
-#endif
 
         nrm = sqrt(nrm);
 
