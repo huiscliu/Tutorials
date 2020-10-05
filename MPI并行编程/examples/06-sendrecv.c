@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 {
     MPI_Comm comm = MPI_COMM_WORLD;
     int rank, nprocs;
-    int sb[4];
+    int sb[4] = {1, 1, 1, 1};
     int rb[4] = {0, 0, 0, 0};
     MPI_Status status;
 
@@ -23,11 +23,6 @@ int main(int argc, char **argv)
 
     /* process 0 sends info to 1 */
     if (rank == 0) {
-        sb[0] = 0;
-        sb[1] = 1;
-        sb[2] = 2;
-        sb[3] = 3;
-
         MPI_Send(sb, 2, MPI_INT, 1, 999, comm);
     }
     else if (rank == 1) {

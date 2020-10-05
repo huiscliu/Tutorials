@@ -6,7 +6,12 @@
 
 /* rank 0 computes L2 norm of a vector
  * length is 1 million
- * v[i] = i */
+ * v[i] = i 
+ *
+ * L2 norm of a vector:
+ * |v|_2 = sqrt(v[0]*v[0] + v[1]*v[1] + .... + v[n]*v[n]) 
+ *
+ * */
 int main(int argc, char **argv)
 {
     MPI_Comm comm = MPI_COMM_WORLD;
