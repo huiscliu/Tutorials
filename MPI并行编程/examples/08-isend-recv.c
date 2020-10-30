@@ -59,6 +59,9 @@ int main(int argc, char **argv)
         printf("received: %d %d\n", rb[0], rb[1]);
     }
 
+    free(sb);
+    free(rb);
+
 end:
     MPI_Finalize();
 

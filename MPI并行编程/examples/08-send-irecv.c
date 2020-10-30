@@ -31,32 +31,20 @@ int main(int argc, char **argv)
 
     /* process 0 sends info to 1 */
     if (rank == 0) {
-        int flag = 0;
-
         sb = malloc(size * sizeof(*sb));
 
         for (i = 0; i < size; i++) sb[i] = size - 1 - i;
 
         /* send */
-        MPI_Isend(sb, size, MPI_INT, 1, 999, comm, &req);
-
-        /* test if Isend completes */
-        MPI_Test(&req, &flag, &status);
-
-        if (flag) {
-            printf("send completed\n");
-        }
-        else {
-            printf("send not completed yet. now force send to complete\n");
-
-            /* force to complete */
-            MPI_Wait(&req, &status);
-        }
+        MPI_Send(sb, size, MPI_INT, 1, 999, comm);
     }
     else if (rank == 1) {
         int flag = 0;
 
         MPI_Irecv(rb, size, MPI_INT, 0, 999, comm, &req);
+
+        /* test if Isend completes */
+        MPI_Test(&req, &flag, &status);
 
         if (flag) {
             printf("receive completed\n");
