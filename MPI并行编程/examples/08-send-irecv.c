@@ -27,8 +27,6 @@ int main(int argc, char **argv)
         goto end;
     }
 
-    rb = malloc(size * sizeof(*rb));
-
     /* process 0 sends info to 1 */
     if (rank == 0) {
         sb = malloc(size * sizeof(*sb));
@@ -40,6 +38,8 @@ int main(int argc, char **argv)
     }
     else if (rank == 1) {
         int flag = 0;
+
+        rb = malloc(size * sizeof(*rb));
 
         MPI_Irecv(rb, size, MPI_INT, 0, 999, comm, &req);
 

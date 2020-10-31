@@ -27,8 +27,6 @@ int main(int argc, char **argv)
         goto end;
     }
 
-    rb = malloc(size * sizeof(*rb));
-
     /* process 0 sends info to 1 */
     if (rank == 0) {
         int flag = 0;
@@ -54,6 +52,8 @@ int main(int argc, char **argv)
         }
     }
     else if (rank == 1) {
+        rb = malloc(size * sizeof(*rb));
+
         MPI_Recv(rb, size, MPI_INT, 0, 999, comm, &status);
 
         printf("received: %d %d\n", rb[0], rb[1]);
