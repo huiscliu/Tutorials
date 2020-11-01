@@ -35,6 +35,7 @@ int main(int argc, char **argv)
         MPI_Send_init(sb, size, MPI_INT, 1, 999, comm, &req);
 
         for (j = 0; j < round; j++) {
+            /* send buffer */
             for (i = 0; i < size; i++) sb[i] = j;
 
             /* real send */
