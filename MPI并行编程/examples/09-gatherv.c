@@ -66,6 +66,11 @@ int main(int argc, char **argv)
         }
     }
 
+    free(rcv_count);
+    free(rcv_disps);
+    free(snd_buf);
+    free(rcv_buf);
+
     MPI_Finalize();
     return 0;
 }
