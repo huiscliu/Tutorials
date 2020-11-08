@@ -11,7 +11,7 @@ int main(int argc, char **argv)
     MPI_Status status;
     void *sb = NULL;
     void *rb = NULL;
-    int position = 0, k, size, buf_size = 2000, dbl_size = 30;
+    int position = 0, k, msg_size, buf_size = 2000, dbl_size = 30;
     double dx[30];
 
     /* initialize */
@@ -47,17 +47,17 @@ int main(int argc, char **argv)
     }
     else if (rank == 1) {
         /* receive message size */
-        MPI_Recv(&size, 1, MPI_INT, 0, 99, comm, &status);
+        MPI_Recv(&msg_size, 1, MPI_INT, 0, 99, comm, &status);
 
         /* receive message */
-        MPI_Recv(rb, size, MPI_PACKED, 0, 999, comm, &status);
+        MPI_Recv(rb, msg_size, MPI_PACKED, 0, 999, comm, &status);
 
         /* unpack 1st */
-        MPI_Unpack(rb, size, &position, &k, 1, MPI_INT, comm);
+        MPI_Unpack(rb, msg_size, &position, &k, 1, MPI_INT, comm);
         printf("1st received: %d\n", k);
 
         /* unpack, 2nd rount, dbl_size double */
-        MPI_Unpack(rb, size, &position, dx, dbl_size, MPI_DOUBLE, comm);
+        MPI_Unpack(rb, msg_size, &position, dx, dbl_size, MPI_DOUBLE, comm);
 
         for (k = 0; k < dbl_size; k++) {
             printf("%d-th received double precision number: %.8g\n", k, dx[k]);
