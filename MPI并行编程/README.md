@@ -26,3 +26,6 @@ information will be sent and received.
 MPI (Message Passing Interface) is designed to handle communications in parallel computing environment, which
 defines a collection of API to manage messages. MPI is the most popular communication tool and is used by all
 modern parallel computers.
+
+Buy Me a Coffee & Send Tips: https://www.paypal.me/huiscliu
+
