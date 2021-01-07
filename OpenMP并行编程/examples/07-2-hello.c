@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include <omp.h>
 
 int main()
 {
@@ -7,19 +8,19 @@ int main()
     #pragma omp sections
     {
         #pragma omp section
-        printf("Hello!\n");
+        printf("Hello, id: %d\n", omp_get_thread_num());
 
         #pragma omp section
-        printf("Hi!\n");
+        printf("Hi, id: %d\n", omp_get_thread_num());
 
         #pragma omp section
-        printf("Nihao!\n");
+        printf("Nihao, id: %d\n", omp_get_thread_num());
 
         #pragma omp section
-        printf("Bonjour!\n");
+        printf("Bonjour, id: %d\n", omp_get_thread_num());
 
         #pragma omp section
-        printf("Kon'nichiwa!\n");
+        printf("Kon'nichiwa, id: %d\n", omp_get_thread_num());
     }
 
     return 0;
