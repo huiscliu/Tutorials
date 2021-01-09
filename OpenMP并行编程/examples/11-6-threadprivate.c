@@ -21,8 +21,7 @@ int main()
         printf("This is thread: %d. Value of n is changed to: %d\n", id, n);
     }
 
-    printf("\n\n\n");
-    printf("Final n is: %d\n", n);
+    printf("Serial part n is: %d\n\n", n);
 
     #pragma omp parallel
     {
@@ -33,8 +32,20 @@ int main()
         printf("This is thread: %d. Value of n is changed to: %d\n", id, n);
     }
 
-    printf("\n\n\n");
-    printf("Final n is: %d\n", n);
+    printf("Serial part n is: %d\n\n", n);
+
+    printf("copyin\n");
+
+    #pragma omp parallel copyin(n)
+    {
+        int id;
+
+        id = omp_get_thread_num();
+
+        printf("This is thread: %d. Value of n is changed to: %d\n", id, n);
+    }
+
+    printf("Serial part n is: %d\n\n", n);
 
     return 0;
 }
