@@ -23,12 +23,12 @@ int main()
 
         id = omp_get_thread_num();
 
+        /* error */
         n = id;
         printf("This is thread: %d. I change n to my ID: %d\n", id, n);
     }
 
-    printf("\n\n\n");
-    printf("Data race happened and final n is: %d\n", n);
+    printf("\nData race happened and final n is: %d\n", n);
 
     return 0;
 }
