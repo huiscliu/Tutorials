@@ -7,7 +7,7 @@
 课程将讲述: 1) 各种并行构造; 2) 常用函数调用, 如何设置与获取线程数, 线程 ID; 3) 环境变量, 如何控制程序运行行为; 4) 多核 CPU 架构以及各种细节; 5) 内存多层次架构, UMA, NUMA, ccNUMA; 6) 任务划分方式, 例如循环, sections, single, master; 7) 规约操作以及用户自定义规约算子; 8) 任务构造; 9) 各种常用数据属性, 例如default, private, shared, firstprivate, lastprivate, threadprivate, copyin, copyprivate; 10) 高级主题等.
 
 * [完整课程 UDEMY](https://www.udemy.com/course/openmp-para/?couponCode=OPENMP-DEAL70)
-* [YouTube 部分] (https://www.youtube.com/playlist?list=PLSVM68VUM1eWrdw3w8cCKHLYDi3-k3T9o)
+* [YouTube 部分](https://www.youtube.com/playlist?list=PLSVM68VUM1eWrdw3w8cCKHLYDi3-k3T9o)
 
 课程目录如下:
 00: 内容简介
