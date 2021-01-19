@@ -9,7 +9,7 @@
 * [完整课程 UDEMY](https://www.udemy.com/course/openmp-para/?couponCode=OPENMP-DEAL70)
 * [YouTube 部分课程](https://www.youtube.com/playlist?list=PLSVM68VUM1eWrdw3w8cCKHLYDi3-k3T9o)
 
-课程目录如下:
+课程目录如下: \
 00: 内容简介\
 01.1: CPU 架构\
 01.2: 系统架构\
