@@ -20,9 +20,10 @@ double omp_get_time(void)
 
 int main(int argc, char **argv)
 {
-    int i, len = 100000000;
+    int i, len = 10000000;
     double *x, *y, *z;
     double va_tm;
+    double t = 0.;
 
     if (argc == 2) {
         int tlen = atoi(argv[1]);
@@ -37,11 +38,17 @@ int main(int argc, char **argv)
 
     va_tm = omp_get_time();
 
-    #pragma omp parallel for
+    //#pragma omp parallel for
     for (i = 0; i < len; i++) {
         x[i] = i + 0.3;
         y[i] = i + M_PI;
     }
+
+    va_tm = omp_get_time();
+    for (i = 0; i < len; i++) t += x[i];
+    va_tm = omp_get_time() - va_tm;
+    printf("time: t: %g, %g s\n", t, va_tm);
+
 
     #pragma omp parallel for
     for (i = 0; i < len; i++) {

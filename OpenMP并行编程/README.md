@@ -10,58 +10,58 @@
 * [YouTube 部分课程](https://www.youtube.com/playlist?list=PLSVM68VUM1eWrdw3w8cCKHLYDi3-k3T9o)
 
 课程目录如下:
-00: 内容简介
-01.1: CPU 架构
-01.2: 系统架构
-01.3: 内存组织
-01.4: 非一致内存访问 (NUMA)
-01.5: 并行计算简介
-01.6: 并行机/超级计算机
-01.7: 并行编程
-02.1: 什么是 OpenMP
-02.2: 术语
-02.3: OpenMP 内存模型
-03: 如何编写 OpenMP 程序
-04: 如何编译 OpenMP 程序
-05: 如何执行 OpenMP 程序
-06.1: parallel 构造
-06.2: 设置线程数
-06.3: 获取线程数
-06.4: 获取线程编号 (ID)
-06.5: 例子: 向量加法
-07.0: 工作分配
-07.1: loop
-07.2: sections
-07.3: single
-07.4: master
-07.5: workshare
-07.6: 组合构造
-08.1: 规约 (reduction)
-08.2: 自定义规约
-09.1: 什么是任务
-09.2: task 构造
-09.3: 任务调度
-09.4: 例子: 生成任务
-10: 同步
-11.0: 数据属性
-11.1: default
-11.2: shared
-11.3: private
-11.4: firstprivate
-11.5: lastprivate
-11.6: threadprivate
-11.7: copyin
-11.8: copyprivate
-12.1: 非一致内存访问 (NUMA)
-12.2: 一致性高速缓存非均匀存储访问模型 (ccNUMA)
-12.3: ccNUMA 高速缓存探测策略
-12.4: 内存优化
-12.5: C/C++ 内存管理
-12.6: NUMA-Aware 编程
-12.7: 并行计算通信建模
-12.8: 区域分解
-12.9: 网格划分
-13: 总结
+00: 内容简介\
+01.1: CPU 架构\
+01.2: 系统架构\
+01.3: 内存组织\
+01.4: 非一致内存访问 (NUMA)\
+01.5: 并行计算简介\
+01.6: 并行机/超级计算机\
+01.7: 并行编程\
+02.1: 什么是 OpenMP\
+02.2: 术语\
+02.3: OpenMP 内存模型\
+03: 如何编写 OpenMP 程序\
+04: 如何编译 OpenMP 程序\
+05: 如何执行 OpenMP 程序\
+06.1: parallel 构造\
+06.2: 设置线程数\
+06.3: 获取线程数\
+06.4: 获取线程编号 (ID)\
+06.5: 例子: 向量加法\
+07.0: 工作分配\
+07.1: loop\
+07.2: sections\
+07.3: single\
+07.4: master\
+07.5: workshare\
+07.6: 组合构造\
+08.1: 规约 (reduction)\
+08.2: 自定义规约\
+09.1: 什么是任务\
+09.2: task 构造\
+09.3: 任务调度\
+09.4: 例子: 生成任务\
+10: 同步\
+11.0: 数据属性\
+11.1: default\
+11.2: shared\
+11.3: private\
+11.4: firstprivate\
+11.5: lastprivate\
+11.6: threadprivate\
+11.7: copyin\
+11.8: copyprivate\
+12.1: 非一致内存访问 (NUMA)\
+12.2: 一致性高速缓存非均匀存储访问模型 (ccNUMA)\
+12.3: ccNUMA 高速缓存探测策略\
+12.4: 内存优化\
+12.5: C/C++ 内存管理\
+12.6: NUMA-Aware 编程\
+12.7: 并行计算通信建模\
+12.8: 区域分解\
+12.9: 网格划分\
+13: 总结\
 
 
 Buy Me a Coffee & Send Tips: https://www.paypal.me/huiscliu
