@@ -61,7 +61,7 @@
 12.7: 并行计算通信建模\
 12.8: 区域分解\
 12.9: 网格划分\
-13: 总结\
+13: 总结
 
 
 Buy Me a Coffee & Send Tips: https://www.paypal.me/huiscliu
