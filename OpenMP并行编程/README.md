@@ -63,6 +63,3 @@
 12.9: 网格划分\
 13: 总结
 
-
-Buy Me a Coffee & Send Tips: https://www.paypal.me/huiscliu
-
