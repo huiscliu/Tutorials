@@ -11,7 +11,7 @@ CUDA是建立在NVIDIA的CPUs上的一个通用并行计算平台和编程模型
 * [GPU 计算: CUDA 编程从入门到精通](https://www.udemy.com/course/cuda-yxp/?couponCode=064748E49AF03019A837)
 
 # 部分课程列表
-* [CUDA 编程入门](https://www.youtube.com/playlist?list=PLSVM68VUM1eWsEX0yPliaL3pTZoKqJWfi)
+* [YouTube: CUDA 编程入门](https://www.youtube.com/playlist?list=PLSVM68VUM1eWsEX0yPliaL3pTZoKqJWfi)
 
 # Remark
 The codes only work for Linux and Mac OSX, since a little system programming is required. However, user may
