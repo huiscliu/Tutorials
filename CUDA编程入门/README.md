@@ -91,7 +91,7 @@ Windows environment isn't tested. Thanks.
 7-2-Warp 匹配函数\
 7-3-Warp 规约函数\
 7-4-Warp 内通信: 数据交换\
-8-1-Coalesced Groups\
+8-1-Cooperative Groups\
 8-2-隐式组类型\
 8-3-显式组类型\
 8-4-Coalesced Groups\
