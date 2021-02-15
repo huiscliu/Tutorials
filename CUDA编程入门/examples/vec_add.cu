@@ -11,9 +11,6 @@ typedef float FLOAT;
 /* get block id: 2D grid */
 #define get_bid() (blockIdx.x + blockIdx.y * gridDim.x)
 
-/* warm up, start GPU, optional */
-void warmup();
-
 /* get time stamp */
 double get_time(void);
 
@@ -74,25 +71,6 @@ double get_time(void)
 }
 #endif
 
-/* warm up GPU */
-__global__ void warmup_knl()
-{
-    int i, j;
-
-    i = 1;
-    j = 2;
-    i = i + j;
-}
-
-void warmup()
-{
-    int i;
-
-    for (i = 0; i < 8; i++) {
-        warmup_knl<<<1, 256>>>();
-    }
-}
-
 int main()
 {
     int N = 20000000;
@@ -112,9 +90,6 @@ int main()
     int itr = 30;
     int i;
     double th, td;
-
-    /* warm up GPU */
-    warmup();
 
     /* allocate GPU mem */
     cudaMalloc((void **)&dx, nbytes);
@@ -150,9 +125,6 @@ int main()
     cudaMemcpy(dx, hx, nbytes, cudaMemcpyHostToDevice);
     cudaMemcpy(dy, hy, nbytes, cudaMemcpyHostToDevice);
     cudaMemcpy(dz, hz, nbytes, cudaMemcpyHostToDevice);
-
-    /* warm up */
-    warmup();
 
     /* call GPU */
     cudaDeviceSynchronize();
