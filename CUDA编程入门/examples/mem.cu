@@ -50,7 +50,7 @@ int main()
     sum<<<1, N>>>(dx);
 
     /* let GPU finish */
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 
     /* copy data from GPU */
     cudaMemcpy(hx, dx, nbytes, cudaMemcpyDeviceToHost);

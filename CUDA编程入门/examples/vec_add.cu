@@ -155,12 +155,12 @@ int main()
     warmup();
 
     /* call GPU */
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
     td = get_time();
     
     for (i = 0; i < itr; i++) vec_add<<<grid, bs>>>(dx, dy, dz, N);
 
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
     td = get_time() - td;
 
     /* CPU */

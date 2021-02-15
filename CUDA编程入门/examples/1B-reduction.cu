@@ -117,7 +117,7 @@ int main()
     asum_1<<<1, N>>>(dx, dy);
 
     /* let GPU finish */
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 
     /* copy data from GPU */
     cudaMemcpy(&as, dy, sizeof(FLOAT), cudaMemcpyDeviceToHost);
@@ -128,7 +128,7 @@ int main()
     asum_2<<<1, N>>>(dx, dy);
 
     /* let GPU finish */
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
 
     /* copy data from GPU */
     cudaMemcpy(&as, dy, sizeof(FLOAT), cudaMemcpyDeviceToHost);

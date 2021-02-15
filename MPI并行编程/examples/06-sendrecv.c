@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 {
     MPI_Comm comm = MPI_COMM_WORLD;
     int rank, nprocs;
-    int sb[4] = {1, 1, 1, 1};
+    int sb[4] = {1, 2, 3, 4};
     int rb[4] = {0, 0, 0, 0};
     MPI_Status status;
 

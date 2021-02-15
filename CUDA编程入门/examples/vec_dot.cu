@@ -198,14 +198,14 @@ int main(int argc, char **argv)
     cudaMemcpy(dy, hy, nbytes, cudaMemcpyHostToDevice);
 
     /* let dust fall */
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
     td = get_time();
 
     /* call GPU */
     for (i = 0; i < itr; i++) dot_device(dx, dy, dz, d, N);
 
     /* let GPU finish */
-    cudaThreadSynchronize();
+    cudaDeviceSynchronize();
     td = get_time() - td;
 
     th = get_time();
