@@ -14,17 +14,8 @@ CUDA是建立在NVIDIA的CPUs上的一个通用并行计算平台和编程模型
 * [YouTube: CUDA 编程入门](https://www.youtube.com/playlist?list=PLSVM68VUM1eWsEX0yPliaL3pTZoKqJWfi)
 
 # Remark
-The codes only work for Linux and Mac OSX, since a little system programming is required. However, user may
-try to compile under Windows by changing
-```
-#define USE_UNIX 1
-```
-to 
-```
-#define USE_UNIX 0
-```
-
-Windows environment isn't tested. Thanks.
+The codes are only tested under Linux, where a little system programming is required. However, user may
+try to compile and run under Windows. But Windows environment isn't tested. Thanks.
 
 
 # 课程列表

@@ -6,7 +6,6 @@
 #include <cuda.h>
 
 typedef double FLOAT;
-#define USE_UNIX 1
 
 /* get thread id: 1D block and 2D grid */
 #define get_tid() (blockDim.x * (blockIdx.x + blockIdx.y * gridDim.x) + threadIdx.x)
@@ -21,7 +20,7 @@ double get_time(void);
 FLOAT asum_host(FLOAT *x, int N);
 
 /* a little system programming */
-#if USE_UNIX
+#if defined(__linux__) || defined(__APPLE__)
 
 #include <sys/time.h>
 #include <time.h>
@@ -36,7 +35,9 @@ double get_time(void)
 
     return t;
 }
-#else
+
+#elif defined(_WIN32)
+
 #include <windows.h>
 
 double get_time(void)
@@ -57,6 +58,8 @@ double get_time(void)
 
     return t;
 }
+#else
+#error "unknown OS"
 #endif
 
 /* host, add */
