@@ -71,6 +71,7 @@ __global__ void asum_2(const FLOAT *x, FLOAT *y)
     __syncthreads();
 
     if (tid < 32) warpReduce(sdata, tid);
+    __syncthreads();
 
     if (tid == 0) y[0] = sdata[0];
 }
