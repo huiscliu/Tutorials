@@ -14,9 +14,6 @@ typedef double FLOAT;
 /* get block id: 2D grid */
 #define get_bid() (blockIdx.x + blockIdx.y * gridDim.x)
 
-/* warm up, start GPU, optional */
-void warmup();
-
 /* get time stamp */
 double get_time(void);
 
@@ -62,25 +59,6 @@ double get_time(void)
 }
 #endif
 
-/* warm up GPU */
-__global__ void warmup_knl()
-{
-    int i, j;
-
-    i = 1;
-    j = 2;
-    i = i + j;
-}
-
-void warmup()
-{
-    int i;
-
-    for (i = 0; i < 8; i++) {
-        warmup_knl<<<1, 256>>>();
-    }
-}
-
 /* host, add */
 FLOAT asum_host(FLOAT *x, int N)
 {
@@ -91,5 +69,4 @@ FLOAT asum_host(FLOAT *x, int N)
 
     return t;
 }
-
 #endif
