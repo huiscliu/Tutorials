@@ -64,6 +64,7 @@ __global__ void asum_stg_3(FLOAT *x, int N)
     __syncthreads();
 
     if (tid < 32) warpReduce(sdata, tid);
+    __syncthreads();
 
     if (tid == 0) x[0] = sdata[0];
 }
