@@ -1,17 +1,22 @@
 #include <stdio.h>
 #include <cuda.h>
 
+/* cg */
+#include <cooperative_groups.h>
+using namespace cooperative_groups;
+
 __global__ void bcast(int arg) 
 {
-    int laneId = threadIdx.x & 0x1f;
+    coalesced_group g = coalesced_threads();
+    int laneId = g.thread_rank();
     int value;
 
     if (laneId == 0)  value = arg; 
 
     // Synchronize all threads in warp, and get "value" from lane 0
-    value = __shfl_sync(0xffffffff, value, 0);
-    if (value != arg)
-        printf("Thread %d failed.\n", threadIdx.x);
+    value = g.shfl(value, 0);
+
+    if (value != arg) printf("Thread %d failed.\n", threadIdx.x);
 }
 
 int main()
