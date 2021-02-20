@@ -17,6 +17,7 @@ CUDA是建立在NVIDIA的CPUs上的一个通用并行计算平台和编程模型
 The codes are only tested under Linux, where a little system programming is required. However, user may
 try to compile and run under Windows. But Windows environment isn't tested. Thanks.
 
+Some codes requires computer capability is 8.0 or higher.
 
 # 课程列表
 

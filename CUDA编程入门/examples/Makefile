@@ -1,6 +1,6 @@
 
 CUCC     = nvcc
-CUFLAGS  = -O3 -Xcompiler "-Wall -Wextra"
+CUFLAGS  = -O3 -arch=sm_80 -Xcompiler "-Wall -Wextra"
 
 SRC_CU   = $(wildcard *.cu)
 DIR_CU   = $(notdir $(SRC_CU))
