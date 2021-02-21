@@ -8,6 +8,16 @@
 typedef double FLOAT;
 
 /* sum all entries in x and asign to y */
+__device__ void warpReduce(volatile FLOAT *sdata, int tid)
+{
+    sdata[tid] += sdata[tid + 32];
+    sdata[tid] += sdata[tid + 16];
+    sdata[tid] += sdata[tid + 8];
+    sdata[tid] += sdata[tid + 4];
+    sdata[tid] += sdata[tid + 2];
+    sdata[tid] += sdata[tid + 1];
+}
+
 __global__ void VecSumKnl(const FLOAT *x, FLOAT *y)
 {
     __shared__ FLOAT sdata[256];
@@ -24,24 +34,10 @@ __global__ void VecSumKnl(const FLOAT *x, FLOAT *y)
     if (tid < 64) sdata[tid] += sdata[tid + 64];
     __syncthreads();
 
-    if (tid < 32) sdata[tid] += sdata[tid + 32];
+    if (tid < 32) warpReduce(sdata, tid);
     __syncthreads();
 
-    if (tid < 16) sdata[tid] += sdata[tid + 16];
-    __syncthreads();
-
-    if (tid < 8) sdata[tid] += sdata[tid + 8];
-    __syncthreads();
-
-    if (tid < 4) sdata[tid] += sdata[tid + 4];
-    __syncthreads();
-
-    if (tid < 2) sdata[tid] += sdata[tid + 2];
-    __syncthreads();
-
-    if (tid == 0) {
-        *y = sdata[0] + sdata[1];
-    }
+    if (tid == 0) y[0] = sdata[0];
 }
 
 int main()
