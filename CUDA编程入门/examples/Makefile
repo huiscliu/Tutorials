@@ -12,4 +12,4 @@ default: ${BIN_CU}
 	${CUCC} ${CUFLAGS} -o $@ $*.cu
 
 clean:
-	rm -f ${BIN_CU}
+	rm -fv ${BIN_CU}
