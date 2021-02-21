@@ -5,8 +5,6 @@
 #include <stdio.h>
 #include <cuda.h>
 
-typedef double FLOAT;
-
 /* get thread id: 1D block and 2D grid */
 #define get_tid() (blockDim.x * (blockIdx.x + blockIdx.y * gridDim.x) + threadIdx.x)
 

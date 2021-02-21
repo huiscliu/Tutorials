@@ -1,7 +1,9 @@
 
 /* asum: sum of all entries of a vector */
 
-#include "reduction_aux.h"
+#include "aux.h"
+
+typedef double FLOAT;
 
 /* sum all entries in x and asign to y
  * block dim must be 256 */
@@ -118,6 +120,19 @@ void asum(FLOAT *dx, FLOAT *dy, FLOAT *dz, int N)
 
     /* stage 3 */
     asum_stg_3<<<1, 128>>>(dz, gs);
+}
+
+/* host, add */
+FLOAT asum_host(FLOAT *x, int N);
+
+FLOAT asum_host(FLOAT *x, int N)
+{
+    int i;
+    FLOAT t = 0;
+
+    for (i = 0; i < N; i++) t += x[i];
+
+    return t;
 }
 
 int main(int argc, char **argv)
