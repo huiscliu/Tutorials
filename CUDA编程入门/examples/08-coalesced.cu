@@ -7,7 +7,7 @@ using namespace cooperative_groups;
 
 __global__ void kernel()
 {
-    int oe = threadIdx.x & 0x1;  /* odd or even */
+    int oe = threadIdx.x & 1;  /* odd or even */
 
     /* include all threads */
     coalesced_group g1 = coalesced_threads();

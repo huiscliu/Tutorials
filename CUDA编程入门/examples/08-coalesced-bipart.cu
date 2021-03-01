@@ -14,15 +14,15 @@ __global__ void kernel()
     unsigned int mask = __activemask();
 
     /* g2, g3 and g4 are equivalent */
-    coalesced_group g3 = binary_partition(g1, oe);
-    coalesced_group g4 = labeled_partition(g1, oe);
+    coalesced_group g2 = binary_partition(g1, oe);
+    coalesced_group g3 = labeled_partition(g1, oe);
 
     if (oe) {
-        coalesced_group g2 = coalesced_threads();
+        coalesced_group g4 = coalesced_threads();
         mask = __activemask();
     }
     else {
-        coalesced_group g2 = coalesced_threads();
+        coalesced_group g4 = coalesced_threads();
         mask = __activemask();
     }
 
