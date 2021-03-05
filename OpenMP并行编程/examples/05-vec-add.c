@@ -36,9 +36,7 @@ int main(int argc, char **argv)
     y = malloc(sizeof(*y) * len);
     z = malloc(sizeof(*z) * len);
 
-    va_tm = omp_get_time();
-
-    //#pragma omp parallel for
+    #pragma omp parallel for
     for (i = 0; i < len; i++) {
         x[i] = i + 0.3;
         y[i] = i + M_PI;
@@ -47,8 +45,9 @@ int main(int argc, char **argv)
     va_tm = omp_get_time();
     for (i = 0; i < len; i++) t += x[i];
     va_tm = omp_get_time() - va_tm;
-    printf("time: t: %g, %g s\n", t, va_tm);
+    printf("Serial result: %g, time: %g s\n", t, va_tm);
 
+    va_tm = omp_get_time();
 
     #pragma omp parallel for
     for (i = 0; i < len; i++) {
@@ -56,7 +55,7 @@ int main(int argc, char **argv)
     }
 
     va_tm = omp_get_time() - va_tm;
-    printf("time: %g s\n", va_tm);
+    printf("OMP time: %g s\n", va_tm);
 
     free(x);
     free(y);

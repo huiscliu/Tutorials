@@ -7,6 +7,7 @@ int main(int argc, char **argv)
     MPI_Comm comm = MPI_COMM_WORLD;
     int rank, nprocs;
 
+    /* init env */
     MPI_Init(&argc, &argv);
 
     /* get total number of processes */
