@@ -7,11 +7,8 @@ GPU 加速计算可以提供非凡的应用程序性能，能将应用程序计�
 CUDA是建立在NVIDIA的CPUs上的一个通用并行计算平台和编程模型，基于CUDA编程可以利用GPUs的并行计算引擎来更加高效地解决比较复杂的计算难题。近年来，GPU最成功的一个应用就是深度学习领域，基于GPU的并行计算已经成为训练深度学习模型的标配。
 
 
-# 高级课程
-* [GPU 计算: CUDA 编程从入门到精通](https://www.udemy.com/course/cuda-yxp/?couponCode=064748E49AF03019A837)
-
-# 部分课程
-* [YouTube: CUDA 编程入门](https://www.youtube.com/playlist?list=PLSVM68VUM1eWsEX0yPliaL3pTZoKqJWfi)
+# YouTube
+* [CUDA 编程入门](https://www.youtube.com/playlist?list=PLSVM68VUM1eWsEX0yPliaL3pTZoKqJWfi)
 
 # Remark
 The codes are only tested under Linux, where a little system programming is required. However, user may
