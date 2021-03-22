@@ -1,5 +1,5 @@
 
 # OpenMP Intro
 
-basic examples.
+Basic examples to show how to use OpenMP.
 

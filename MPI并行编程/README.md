@@ -1,3 +1,3 @@
 
 # MPI
-some toy examples
+Some basic examples to show how to use MPI.

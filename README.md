@@ -1,3 +1,3 @@
 # Tutorials
 
-Some programming tutorials
+Some basic programming tutorials
